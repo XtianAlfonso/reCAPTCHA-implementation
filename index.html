@@ -1,0 +1,61 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Login with reCAPTCHA V2</title>
+        <!-- Google reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+    <style> 
+        body {
+            background-color: rgb(255, 255, 255);
+        }
+        form {
+            background-color: rgb(78, 4, 8); 
+            width: 20%; 
+            margin: 100px; 
+            padding: 50px; 
+            border-radius: 10px; 
+        }
+    </style>
+<body>
+   <!-- Main login form -->
+    <form id="userLoginForm">
+        <h1>ULTIMATE SECRET SITE!11!!!1!</h1> 
+        <input id="userInput" type="text" name="username" placeholder="Username"><br><br>
+        <input id="passInput" type="password" name="password" placeholder="Password"><br><br> 
+        <form action="process.php" method="post">
+           <!-- Google reCAPTCHA -->
+          <div class="g-recaptcha" data-sitekey="6LddqE4qAAAAAJ-54JcFhI1ENVVhS0o60vNfa4Yo"></div>
+            <!-- Submit button -->
+          <input type="submit" value="Submit">
+      </form>
+        
+    </form>
+    <script>
+       // Event listener for form submission
+        document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var username = document.getElementById('userInput').value;
+            var password = document.getElementById('passInput').value;
+            
+            // Get the reCAPTCHA response
+            var captchaResponse = grecaptcha.getResponse();
+            
+            // check if reCAPTCHA is complete
+            if (!captchaResponse) {
+                alert('Please complete reCAPTCHA!');  // Alert if reCAPTCHA is not completed
+                return;
+            }
+            
+            if (username === "geropi" && password === "gero19") {
+                alert('Login successful');
+                window.location.href = "http://whitetrash.nl/"; // link to another URL
+            } else {
+                alert("Invalid username or password"); // Alert if failed login
+            }
+            console.log('Form submitted', { username, password, captchaResponse });
+        });
+    </script>
+</body>
+</html>
